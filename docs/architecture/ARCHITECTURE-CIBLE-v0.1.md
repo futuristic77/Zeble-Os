@@ -176,6 +176,73 @@ Proposition — en attente d'approbation par le fondateur.
 - Services système (OTA).
 - Framework (permissions, isolation).
 
+## 2. AOSP FOUNDATION
+
+**Responsabilités :**
+- Fournir le framework Android de base : ART, Binder, ActivityManager, WindowManager, SurfaceFlinger.
+- Exposer les composants système (chiffrement, sécurité, gestion mémoire).
+- Définir l'interface entre le framework et les couches supérieures.
+
+**Interfaces :**
+- API pour les applications (Activity, Service).
+- Interface avec le noyau (ART, Binder).
+- Interfaces AVB / SELinux / Chiffrement / OTA.
+
+**Dépendances :**
+- Noyau Linux (via ART/Binder).
+- Composants existants d'AOSP (ActivityManager, WindowManager, etc.).
+
+**Critères de validation :**
+- Le framework compile et fonctionne sur ARM64.
+- Les services AOSP (ActivityManager, etc.) restent inchangés.
+- AVB et SELinux enforcing préservés.
+
+**Statut :** Proposition.
+
+---
+
+## 3. ZÊBLÈ CORE
+
+**Responsabilités :** Core Services, Resource Manager, Power Manager, Device Manager, Update Manager, Security Center, Diagnostics.
+
+**Interfaces :** Appels aux services système, au framework, au noyau.
+
+**Dépendances :** Framework, HAL, Noyau.
+
+**Critères de validation :** Fonctionnement des services core sur appareil de référence, isolation, chiffrement.
+
+**Statut :** Proposition.
+
+---
+
+## 4. ZÊBLÈ EXPERIENCE
+
+**Responsabilités :** Launcher, SystemUI, Settings, Design System, Animations/interactions, Applications natives.
+
+**Interfaces :** Affichage UI, tactile, notifications.
+
+**Dépendances :** Framework, HAL, Services système.
+
+**Critères de validation :** Prototype UI affiché, interactions fluides, compatibilité française.
+
+**Statut :** Proposition.
+
+---
+
+## 5. Règles de préservation
+
+- Ne réimplémenter pas les fonctions AOSP.
+- Identifier les composants AOSP existants avant proposer un service.
+- Éviter les dépendances circulaires.
+- Respecter SELinux enforcing, AVB, chiffrement, anti-rollback.
+- Principe du moindre privilège.
+```
+
+Now append remaining small sections (5. Règles de préservation already included; then maybe close with next steps). Actually I inserted up to before "## 5. Règles de préservation"? Wait my insertion started at line 178 which was after "## 3. Relations...". My new text begins with "## 2. AOSP FOUNDATION ... ## 3. ZÊBLÈ CORE ... ## 4. ZÊBLÈ EXPERIENCE ... ## 5. Règles de préservation". So it covers everything. Good.
+
+Let me verify by reading tail again quickly via run_commands `tail -n 20`.</think><tool_call>
+<function=run_commands>
+
 ## 3. Relations et dépendances entre les couches
 
 ```
